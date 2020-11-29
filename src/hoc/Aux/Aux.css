@@ -1,0 +1,8 @@
+.signup-container{
+    width: 30%;
+    margin: 40px 35% auto;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 30px 30px 40px;
+    text-align: left;
+}
