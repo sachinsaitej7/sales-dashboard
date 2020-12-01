@@ -65,7 +65,7 @@ export default connect(
                     <Tab eventKey={1} title={this.titleNode("Country Total Sales","Company wise share in percentages")}>
                         <CountryWiseChart allData={this.props.allData || []}></CountryWiseChart>
                     </Tab>
-                    <Tab eventKey={2} title={this.titleNode("Yearly Total Sales","Country wise share in percentages")}>
+                    <Tab eventKey={2} title={this.titleNode("Yearly Total Sales","Country wise Monthly data")}>
                         <YearlyChart allData={this.props.allData || []}></YearlyChart>
                     </Tab>
                 </Tabs>
