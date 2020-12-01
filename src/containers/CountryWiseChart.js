@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Doughnut} from 'react-chartjs-2';
-import Aux from '../hoc/Aux/Aux';
+import Aux from '../hoc/Aux';
 import './SalesChart.css';
 import {MONTHS} from '../constants';
 

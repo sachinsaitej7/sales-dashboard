@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { toast } from 'react-toastify';
 
 import firebase from '../firebase';
-import Aux from '../hoc/Aux/Aux';
+import Aux from '../hoc/Aux';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 

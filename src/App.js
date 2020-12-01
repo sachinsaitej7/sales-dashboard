@@ -10,9 +10,9 @@ import { loginUser,logoutUser } from './redux/modules/auth';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';  // material ui components require a theme
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import asyncComponent from './hoc/Aux/AsyncComponent';
-import AuthenticatedRoute from './hoc/Aux/AuthenticatedRoute';
-import CheckAuthRoute from './hoc/Aux/CheckAuthRoute';
+// import asyncComponent from './hoc/AsyncComponent';
+import AuthenticatedRoute from './hoc/AuthenticatedRoute';
+import CheckAuthRoute from './hoc/CheckAuthRoute';
 import {get} from './helpers/LocalStorageHelper';
 
 import Login from './containers/Login';

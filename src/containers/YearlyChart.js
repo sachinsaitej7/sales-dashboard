@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Bar} from 'react-chartjs-2';
-import Aux from '../hoc/Aux/Aux';
+import Aux from '../hoc/Aux';
 import './SalesChart.css';
 import {MONTHS, LABELS} from '../constants';
 
@@ -23,7 +23,6 @@ class YearlyChart extends Component {
         super(props);
         this.state = {
             currentCountry: "all",
-            companies: [],
             sales: []
         }
     }

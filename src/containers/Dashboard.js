@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import Aux from '../hoc/Aux/Aux';
+import Aux from '../hoc/Aux';
 import WorldWideSalesChart from './WorldSalesChart';
 import CountryWiseChart from './CountryWiseChart';
 import YearlyChart from './YearlyChart';

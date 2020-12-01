@@ -10,7 +10,7 @@ function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? '/' + path : path;
   // Prepend `/api` to relative URL, to proxy to API server.
   return config.path.apiserver + adjustedPath;
-  // return 'https://magicpin.in/api' + adjustedPath;
+  // return custom backend server + adjustedPath;
 }
 
 export default class ApiClient {

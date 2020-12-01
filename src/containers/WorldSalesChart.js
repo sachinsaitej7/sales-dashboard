@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Line} from 'react-chartjs-2';
 import './SalesChart.css';
-import Aux from '../hoc/Aux/Aux';
+import Aux from '../hoc/Aux';
 import Button from 'react-bootstrap/Button';
 import Chip from '@material-ui/core/Chip';
 import {MONTHS, LABELS} from '../constants';
@@ -44,6 +44,7 @@ class CompareChart extends Component {
         this.state = {
             compareCompanies: [],
             currentCompany: "",
+            colorsLeft: colors,
         }
     }
 
@@ -59,8 +60,8 @@ class CompareChart extends Component {
     }
 
     addCompanyToCompare = () => {
-        if(this.state.compareCompanies.length >= 6)
-            return toast.info("You can add upto 6 companies");
+        if(this.state.compareCompanies.length >= 5)
+            return toast.info("You can add upto 5 companies");
         let worldwideSales = this.props.allData.filter(item => item["Company"] === this.state.currentCompany);
         let values = this.combineMonthSales(worldwideSales)
         let graph = {
@@ -68,14 +69,15 @@ class CompareChart extends Component {
             fill: false,
             lineTension: 0.5,
             backgroundColor: "black",
-            borderColor: colors[this.state.compareCompanies.length],
+            borderColor: this.state.colorsLeft.length > 0 ? this.state.colorsLeft[0]: "black",
             borderWidth: 2,
             data: values,
         };
         this.setState(prevState => {
             return {
                 compareCompanies: [...prevState.compareCompanies,graph],
-                currentCompany: ""
+                currentCompany: "",
+                colorsLeft: prevState.colorsLeft.slice(1,prevState.colorsLeft.length),
             }
         })
     }
@@ -83,7 +85,8 @@ class CompareChart extends Component {
     handleDelete = (chipToDelete) => () => {
         this.setState(prevState => {
             return {
-                compareCompanies: prevState.compareCompanies.filter((chip) => chip.label !== chipToDelete.label)
+                compareCompanies: prevState.compareCompanies.filter((chip) => chip.label !== chipToDelete.label),
+                colorsLeft: [...prevState.colorsLeft,chipToDelete.borderColor]
             }
         });
     };
@@ -122,8 +125,10 @@ class CompareChart extends Component {
 
     getListFromData = (key) => {
         let newList = [];
+        let selectedCities = new Set(this.state.compareCompanies.map(item => item["label"]));
+        console.log(selectedCities);
         if(this.props.allData)
-            newList = this.props.allData.map(item => item[key] ? item[key]: "");
+            newList = this.props.allData.filter(item => (!selectedCities.has(item[key]))).map(item => item[key] ? item[key]: "");
         return [...new Set(newList)];
     }
 
