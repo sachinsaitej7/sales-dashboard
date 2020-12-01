@@ -28,8 +28,8 @@ class Header extends Component {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#features">Features</Nav.Link>
-                            <Nav.Link href="#pricing">Pricing</Nav.Link>
+                            {/* <Nav.Link href="#features">Features</Nav.Link>
+                            <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                         </Nav>
                         <Nav>
                             {
@@ -39,7 +39,7 @@ class Header extends Component {
                                            Hey, {user.displayName}
                                         </Nav.Link>
                                         <Nav.Link>
-                                            <Avatar alt="Remy Sharp" src={user.photoURL} />
+                                            <Avatar alt="profile photo" src={user.photoURL} />
                                         </Nav.Link>
                                         <Nav.Link eventKey={2} onSelect={e => this.props.logoutUser()}>
                                             Logout

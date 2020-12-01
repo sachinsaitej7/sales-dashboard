@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux';
+import { toast } from 'react-toastify';
 
 import firebase from '../firebase';
 import Aux from '../hoc/Aux/Aux';
-import Form from 'react-bootstrap/Form';
+import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 
 import {loginUser} from '../redux/modules/auth';
@@ -51,15 +52,7 @@ export default connect(
         firebase.auth().signInWithPopup(provider)
         .then(getUserData)
         .catch(error => {
-          // Handle Errors here.
-          // var errorCode = error.code;
-          // var errorMessage = error.message;
-          // this.props.loginUser(null,null,errorMessage)
-          // The email of the user's account used.
-          // var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          // var credential = error.credential;
-          // ...
+            toast.error("Failed to login, try again after sometime")
         });        
       }
     }
@@ -67,8 +60,10 @@ export default connect(
     onSignOut = () => {
       firebase.auth().signOut()
       .then(res => {
+
       })
       .catch(error => {
+            toast.error("Failed to logout, try again after sometime")
       });
     }
 
@@ -80,36 +75,18 @@ export default connect(
     
 
     render () {
-        let email = this.state.email;
-        let password = this.state.password;
-
         return (
           <Aux className="signup-container">
-            <h2 style={{marginBottom:"10px",textAlign:"center"}}>Sign in</h2>
-            <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => this.onChange('email',e.target.value)} />
-                <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
-                </Form.Text>
-              </Form.Group>
-
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" value={password} onChange={e => this.onChange('password',e.target.value)}/>
-              </Form.Group>
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Check me out" />
-              </Form.Group>
-              <div style={{display:"flex",justifyContent:"space-between",flexDirection:"row"}}>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-                <div  style={{width:"50px"}} onClick={this.onSignIn}>Google </div>
-                <div onClick={this.onSignOut}> Sign out</div>
-              </div>
-            </Form>
+            <Jumbotron fluid>
+              <Aux>
+                <h2>Sales Dashboard</h2>
+                <p>
+                  Login to dashboard to view the reports of different company sales data accross the globe
+                </p>
+                <Button onClick={this.onSignIn} variant="outline-primary"> Signin with Google</Button>
+                <p style={{fontSize:"12px",color:"rgba(0,0,0,0.57)",marginTop:"4px"}}>we never share your data with anyone</p>
+              </Aux>
+            </Jumbotron>
           </Aux>
         );
     }

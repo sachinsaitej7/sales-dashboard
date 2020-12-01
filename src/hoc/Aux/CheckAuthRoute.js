@@ -1,12 +1,20 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
+import Loader from "../../components/Loader";
 
-const CheckAuthRoute = (props) => {
-    if(props.user)
-        props.push('/dashboard');
+const checkAuthRoute = (props) => {
+    if(props.user){
+        return (
+            <Redirect to={{
+                pathname: '/dashboard',
+                search: props.location.search
+            }} />
+        )
+    }
     else{
         const C = props.component;
-        return C ? <C {...props} /> : null;
+        return C ? <C {...props} /> : <Loader></Loader>;
     }
-    return null;
 }
-export default CheckAuthRoute;
+
+export default checkAuthRoute;
