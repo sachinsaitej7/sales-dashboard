@@ -9,6 +9,7 @@ import CountryWiseChart from './CountryWiseChart';
 import YearlyChart from './YearlyChart';
 
 import {getData,getAllData,setData} from '../redux/modules/firestore';
+const ga = window.ga;
 
 export default connect(
   store => ({
@@ -29,12 +30,14 @@ export default connect(
 
     componentDidMount () {
         this.props.getAllData();
+        ga('send', 'pageview', 'dashboard');
     }
 
     changeTab = (value) => {
         this.setState({
             activeTab: value
         })
+        ga('send', 'event', 'tab_btn','tab_change_clicked',value);
     }
 
     titleNode = (title,subtitle) => {

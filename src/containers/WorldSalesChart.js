@@ -37,6 +37,7 @@ const legend = {
 
 const colors = ["#3b74fc","#f9a80a","#FF0D0D","#00A6B4","#2FDE00"];
 
+const ga = window.ga;
 
 class CompareChart extends Component {
     constructor(props) {
@@ -60,6 +61,7 @@ class CompareChart extends Component {
     }
 
     addCompanyToCompare = () => {
+        ga('send', 'event', 'compare_company_btn','compare_company_clicked',this.state.currentCompany);
         if(this.state.compareCompanies.length >= 5)
             return toast.info("You can add upto 5 companies");
         let worldwideSales = this.props.allData.filter(item => item["Company"] === this.state.currentCompany);

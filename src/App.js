@@ -19,6 +19,8 @@ import Login from './containers/Login';
 import Header from './containers/Header';
 import Dashboard from './containers/Dashboard';
 
+const ga = window.ga;
+
 export default withRouter(connect(
   store => ({
     user: store.auth.user,
@@ -42,6 +44,8 @@ export default withRouter(connect(
     if(user){
       this.props.loginUser(user,accessToken);
     }
+    ga('create', 'UA-107718078-1', { 'userId':-1000 });
+    ga('require', 'displayfeatures');
   }
 
 
@@ -50,7 +54,8 @@ export default withRouter(connect(
   }
 
   componentWillReceiveProps(nextProps) {
-    
+    if(nextProps.user)
+      ga('set','userId',nextProps.user.uid);
   }
 
 

@@ -5,6 +5,7 @@ import './SalesChart.css';
 import {MONTHS} from '../constants';
 
 const colors = ["#3b74fc","#FF0D0D", "#fdcb0e","#00A6B4","#2FDE00"];
+const ga = window.ga;
 
 const legend = {
     display: true,
@@ -45,6 +46,7 @@ class CountrySharesChart extends Component {
     }
 
     addCountryToCompare = (value) => {
+        ga('send', 'event', 'select_country','country_wise_selected',value);
         let countryData = this.props.allData.filter(item => item["Country"] === value);
         let [companies,sales] = this.companyWiseSales(countryData);
         this.setState({

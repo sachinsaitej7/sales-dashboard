@@ -12,6 +12,7 @@ import {loginUser} from '../redux/modules/auth';
 
 
 var provider = new firebase.auth.GoogleAuthProvider();
+const ga = window.ga;
 
 
 export default connect(
@@ -32,13 +33,15 @@ export default connect(
     }
 
     componentDidMount () {
-
+      ga('send', 'pageview', 'login');
     }
   
     onSignIn = () => {
-      let getUserData = result => {
-        var token = result.credential ? result.credential.accessToken : null;
-        var user = result.user;
+      ga('send', 'event', 'sign_in','signin_with_google_btn','empty state')
+      const getUserData = result => {
+        let token = result.credential ? result.credential.accessToken : null;
+        let user = result.user;
+        ga('send', 'event', 'sign_in','sign_in_success',user.uid)
         this.props.loginUser(user,token);
       };
 
@@ -46,12 +49,15 @@ export default connect(
         firebase.auth().getRedirectResult(provider)
         .then(getUserData)
         .catch(error => {
+          ga('send', 'event', 'sign_in','sign_in_error',error.message)
+
         }); 
       }
       else{
         firebase.auth().signInWithPopup(provider)
         .then(getUserData)
         .catch(error => {
+            ga('send', 'event', 'sign_in','sign_in_error',error.message)
             toast.error("Failed to login, try again after sometime")
         });        
       }
@@ -60,9 +66,10 @@ export default connect(
     onSignOut = () => {
       firebase.auth().signOut()
       .then(res => {
-
+        ga('send', 'event', 'sign_out','logout_btn','logout_success')
       })
       .catch(error => {
+            ga('send', 'event', 'sign_out','sign_out_error',error.message)
             toast.error("Failed to logout, try again after sometime")
       });
     }

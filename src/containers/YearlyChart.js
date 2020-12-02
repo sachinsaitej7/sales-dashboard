@@ -18,6 +18,8 @@ const options = {
     maintainAspectRatio: true,
 }
 
+const ga = window.ga;
+
 class YearlyChart extends Component {
     constructor(props){
         super(props);
@@ -50,6 +52,7 @@ class YearlyChart extends Component {
     }
 
     addCountryToCompare = (value="all") => {
+        ga('send', 'event', 'select_country','month_wise_selected',value);
         let countryData = []
         if(value === "all")
             countryData = this.props.allData;
